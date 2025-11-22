@@ -9,6 +9,12 @@ import {
 import { createAccount } from "./routes/auth/create-account";
 import scalarFastify from "@scalar/fastify-api-reference";
 import fastifySwagger from "@fastify/swagger";
+import { authenticateWithPassword } from "./routes/auth/authenticate-with-password";
+import fastifyJwt from "@fastify/jwt";
+
+if (!process.env.JWT_SECRET) {
+  throw new Error("No JWT_SECRET env set.");
+}
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -30,9 +36,14 @@ app.register(scalarFastify, {
   routePrefix: "/docs",
 });
 
+app.register(fastifyJwt, {
+  secret: process.env.JWT_SECRET,
+});
+
 app.register(fastifyCors);
 
 app.register(createAccount);
+app.register(authenticateWithPassword);
 
 app.listen({ port: 3333 }).then(() => {
   console.log("HTTP server running!");
