@@ -2,13 +2,15 @@
   "name": "@saas/api",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tsx watch src/http/server.ts"
+    "dev": "tsx watch src/http/server.ts",
+    "prisma:studio": "prisma studio --config ./prisma.config.ts --browser none --port 5555"
   },
   "dependencies": {
     "@fastify/cors": "^11.1.0",
     "@prisma/adapter-pg": "^7.0.0",
     "@prisma/client": "^7.0.0",
     "@saas/auth": "*",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "fastify": "^5.6.2",
     "fastify-type-provider-zod": "^6.1.0",
