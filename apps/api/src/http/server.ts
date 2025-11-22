@@ -12,6 +12,7 @@ import fastifySwagger from "@fastify/swagger";
 import { authenticateWithPassword } from "./routes/auth/authenticate-with-password";
 import fastifyJwt from "@fastify/jwt";
 import { getProfile } from "./routes/auth/get-profile";
+import { errorHandler } from "./error-handler";
 
 if (!process.env.JWT_SECRET) {
   throw new Error("No JWT_SECRET env set.");
@@ -21,6 +22,8 @@ const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.setSerializerCompiler(serializerCompiler);
 app.setValidatorCompiler(validatorCompiler);
+
+app.setErrorHandler(errorHandler);
 
 app.register(fastifySwagger, {
   openapi: {
