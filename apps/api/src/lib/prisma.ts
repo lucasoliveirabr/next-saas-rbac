@@ -6,5 +6,6 @@ import { env } from "prisma/config";
 const connectionString = env("DATABASE_URL");
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter, log: ["query"] });
+const prismaWithoutLog = new PrismaClient({ adapter });
 
-export { prisma };
+export { prisma, prismaWithoutLog };

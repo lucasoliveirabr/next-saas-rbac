@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "tsx watch src/http/server.ts",
+    "prisma:seed": "prisma db seed",
     "prisma:studio": "prisma studio --config ./prisma.config.ts --browser none --port 5555"
   },
   "dependencies": {
@@ -18,6 +19,7 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
     "@saas/eslint-config": "*",
     "@saas/prettier": "*",
     "@saas/typescript-config": "*",
