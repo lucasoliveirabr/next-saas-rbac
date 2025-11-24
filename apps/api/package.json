@@ -2,9 +2,13 @@
   "name": "@saas/api",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tsx watch src/http/server.ts",
-    "prisma:seed": "prisma db seed",
-    "prisma:studio": "prisma studio --config ./prisma.config.ts --browser none --port 5555"
+    "dev": "npm run env:load tsx watch src/http/server.ts",
+    "env:load": "dotenv -e ../../.env --",
+    "db:reset": "npm run env:load prisma migrate reset",
+    "db:migrate": "npm run env:load prisma migrate dev",
+    "db:generate": "npm run env:load prisma generate",
+    "db:studio": "npm run env:load -- prisma studio --config ./prisma.config.ts --browser none --port 5555",
+    "db:seed": "npm run env:load prisma db seed"
   },
   "dependencies": {
     "@fastify/cors": "^11.1.0",
@@ -13,9 +17,9 @@
     "@prisma/adapter-pg": "^7.0.0",
     "@prisma/client": "^7.0.0",
     "@saas/auth": "*",
+    "@saas/env": "*",
     "@scalar/fastify-api-reference": "^1.40.0",
     "bcryptjs": "^3.0.3",
-    "dotenv": "^17.2.3",
     "fastify": "^5.6.2",
     "fastify-plugin": "^5.1.0",
     "fastify-type-provider-zod": "^6.1.0",
@@ -29,6 +33,7 @@
     "@saas/typescript-config": "*",
     "@types/node": "^24.10.1",
     "@types/pg": "^8.15.6",
+    "dotenv-cli": "^11.0.0",
     "prisma": "^7.0.0",
     "tsx": "^4.20.6"
   },

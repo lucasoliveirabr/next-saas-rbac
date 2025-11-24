@@ -4,8 +4,12 @@ import { prismaWithoutLog as prisma } from "../src/lib/prisma";
 
 async function seed() {
   await prisma.member.deleteMany();
-  await prisma.projects.deleteMany();
+  await prisma.project.deleteMany();
   await prisma.organization.deleteMany();
+  await prisma.member.deleteMany();
+  await prisma.invite.deleteMany();
+  await prisma.account.deleteMany();
+  await prisma.token.deleteMany();
   await prisma.user.deleteMany();
 
   const passwordHash = await bcrypt.hash("12345678", 1);

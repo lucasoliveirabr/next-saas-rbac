@@ -3,6 +3,7 @@ import type { FastifyInstance } from "fastify";
 import type { ZodTypeProvider } from "fastify-type-provider-zod";
 import { BadRequestError } from "../_errors/bad-request-error";
 import { prisma } from "@/lib/prisma";
+import { env } from "@saas/env";
 
 export async function authenticateWithGithub(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -30,21 +31,14 @@ export async function authenticateWithGithub(app: FastifyInstance) {
         "https://github.com/login/oauth/access_token"
       );
 
-      if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
-        throw new Error("No GitHub envs set.");
-      }
-
-      githubOAuthURL.searchParams.set(
-        "client_id",
-        process.env.GITHUB_CLIENT_ID
-      );
+      githubOAuthURL.searchParams.set("client_id", env.GITHUB_OAUTH_CLIENT_ID);
       githubOAuthURL.searchParams.set(
         "client_secret",
-        process.env.GITHUB_CLIENT_SECRET
+        env.GITHUB_OAUTH_CLIENT_SECRET
       );
       githubOAuthURL.searchParams.set(
         "redirect_uri",
-        "http://localhost:3000/api/auth/callback/github"
+        env.GITHUB_OAUTH_CLIENT_REDIRECT_URL
       );
       githubOAuthURL.searchParams.set("code", returnedAuthCode);
 

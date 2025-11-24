@@ -1,0 +1,6 @@
+{
+  "extends": "@saas/typescript-config/base",
+  "include": [
+    "index.ts"
+  ]
+}

@@ -20,7 +20,7 @@ model User {
   invites            Invite[]
   member_on          Member[]
   owns_organizations Organization[]
-  owns_projects      Projects[]
+  owns_projects      Project[]
 
   @@map("users")
 }
@@ -108,12 +108,12 @@ model Organization {
 
   invites  Invite[]
   members  Member[]
-  projects Projects[]
+  projects Project[]
 
   @@map("organizations")
 }
 
-model Projects {
+model Project {
   id          String   @id @default(uuid())
   name        String
   description String
