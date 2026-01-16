@@ -49,10 +49,10 @@ export async function updateMember(app: FastifyInstance) {
         await prisma.member.update({
           data: {
             role,
-            organizationId: organization.id,
           },
           where: {
             id: memberId,
+            organizationId: organization.id,
           },
         });
 
